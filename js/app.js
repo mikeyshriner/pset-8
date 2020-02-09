@@ -9,3 +9,5 @@ function init() {
 
   render();   // we'll write this later
 }
+
+window.onload = init;
