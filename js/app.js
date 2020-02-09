@@ -11,3 +11,7 @@ function init() {
 }
 
 window.onload = init;
+
+function render() {
+  // todo
+}
