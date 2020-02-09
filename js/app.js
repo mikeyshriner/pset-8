@@ -1,3 +1,6 @@
+///////////////////// CONSTANTS /////////////////////////////////////
+
+///////////////////// APP STATE (VARIABLES) /////////////////////////
 let board;
 
 function init() {
@@ -9,9 +12,13 @@ function init() {
 
   render();   // we'll write this later
 }
+///////////////////// CACHED ELEMENT REFERENCES /////////////////////
 
+///////////////////// EVENT LISTENERS ///////////////////////////////
 window.onload = init;
-
+///////////////////// FUNCTIONS /////////////////////////////////////
 function render() {
-  // todo
+  board.forEach(function(mark, index) {
+    console.log(mark, index);
+  });
 }
