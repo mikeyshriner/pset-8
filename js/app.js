@@ -13,7 +13,7 @@ function init() {
   render();   // we'll write this later
 }
 ///////////////////// CACHED ELEMENT REFERENCES /////////////////////
-
+const squares = Array.from(document.querySelectorAll("#board div"));
 ///////////////////// EVENT LISTENERS ///////////////////////////////
 window.onload = init;
 ///////////////////// FUNCTIONS /////////////////////////////////////
