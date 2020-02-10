@@ -11,15 +11,18 @@ const winningConditions = [
 ];
 ///////////////////// APP STATE (VARIABLES) /////////////////////////
 let board;
+let score;
 let turn;
 let win;
+
 ///////////////////// CACHED ELEMENT REFERENCES /////////////////////
 const squares = Array.from(document.querySelectorAll("#board div"));
-const message = document.querySelector("h2");   // grab the subheader
+const message = document.querySelector("h2");
+
 ///////////////////// EVENT LISTENERS ///////////////////////////////
 window.onload = init;
-document.getElementById("reset-button").onclick = init;
 document.getElementById("board").onclick = takeTurn;
+document.getElementById("reset-button").onclick = init;
 ///////////////////// FUNCTIONS /////////////////////////////////////
 function init() {
   board = [
@@ -28,10 +31,26 @@ function init() {
     "", "", ""
   ];
 
-turn = "X";
-win = null;
-
+  turn = whoGoesFirst();
+  win = null;
   render();   // we'll write this later
+}
+
+function whoGoesFirst() {
+  do {
+    var a = prompt("Who goes first?")
+    if (a == null) {
+      break;
+    }
+
+    a = String(a)
+
+    if (a != "X" && a != "x" && a != "O" && a != "o") {
+      alert("Invalid value. Please type either X or O.")
+    }
+  } while (a != "X" && a != "x" && a != "O" && a != "o" && a != null)
+
+  return a
 }
 
 function render() {
@@ -41,9 +60,8 @@ function render() {
 
   message.textContent =
     win === "T" ? "It's a tie!" : win ? `${win} wins!` : `Turn: ${turn}`;
-}
 
- message.textContent = win ? `${win} wins!` : `Turn: ${turn}`;
+}
 
 function takeTurn(e) {
   if (!win) {
@@ -76,3 +94,8 @@ function getWinner() {
 
   return winner ? winner : board.includes("") ? null : "T";
 }
+
+function scoreKeeper() {
+  if (winner == "X") {
+
+  }
