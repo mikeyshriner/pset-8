@@ -27,3 +27,9 @@ function render() {
      squares[index].textContent = mark;    // writes an X or an O on boards
   });
 }
+
+function takeTurn(e) {
+  let index = squares.findIndex(function(square) {
+    return square === e.target;
+  });
+}
