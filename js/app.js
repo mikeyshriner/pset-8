@@ -18,7 +18,7 @@ const squares = Array.from(document.querySelectorAll("#board div"));
 const message = document.querySelector("h2");   // grab the subheader
 ///////////////////// EVENT LISTENERS ///////////////////////////////
 window.onload = init;
-
+document.getElementById("reset-button").onclick = init;
 document.getElementById("board").onclick = takeTurn;
 ///////////////////// FUNCTIONS /////////////////////////////////////
 function init() {
@@ -33,24 +33,34 @@ win = null;
 
   render();   // we'll write this later
 }
+
 function render() {
   board.forEach(function(mark, index) {
-    console.log(mark, index);
-     squares[index].textContent = mark;    // writes an X or an O on boards
+    squares[index].textContent = mark;
   });
 
- message.textContent = `Turn: ${turn}`;
+  message.textContent =
+    win === "T" ? "It's a tie!" : win ? `${win} wins!` : `Turn: ${turn}`;
+}
+
+ message.textContent = win ? `${win} wins!` : `Turn: ${turn}`;
 
 }
 
 function takeTurn(e) {
-  let index = squares.findIndex(function(square) {
-    return square === e.target;
-  });
-  board[index] = turn;
-  turn = turn === "X" ? "O" : "X";  // alternate turns
+  if (!win) {
+    let index = squares.findIndex(function(square) {
+      return square === e.target;
+    });
 
-  render();
+    if (board[index] === "") {
+      board[index] = turn;
+      turn = turn === "X" ? "O" : "X";
+      win = getWinner();
+
+      render();
+    }
+  }
 }
 
 function getWinner() {
@@ -65,6 +75,9 @@ function getWinner() {
       winner = board[condition[0]];
     }
   });
+
+  return winner ? winner : board.includes("") ? null : "T";
+}
 
   return winner;
 }
