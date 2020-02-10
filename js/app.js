@@ -15,6 +15,8 @@ function init() {
     "", "", ""
   ];
 
+turn = "X";
+
   render();   // we'll write this later
 }
 function render() {
