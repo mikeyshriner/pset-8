@@ -9,11 +9,15 @@ const winningConditions = [
   [0, 4, 8],
   [2, 4, 6]
 ];
+
 ///////////////////// APP STATE (VARIABLES) /////////////////////////
 let board;
-let score;
 let turn;
 let win;
+let determine_first_player;
+let x_wins = 0;
+let o_wins = 0;
+let ties= 0
 
 ///////////////////// CACHED ELEMENT REFERENCES /////////////////////
 const squares = Array.from(document.querySelectorAll("#board div"));
@@ -23,6 +27,7 @@ const message = document.querySelector("h2");
 window.onload = init;
 document.getElementById("board").onclick = takeTurn;
 document.getElementById("reset-button").onclick = init;
+document.getElementById("reset-scoreboard").onclick = resetScoreboard;
 ///////////////////// FUNCTIONS /////////////////////////////////////
 function init() {
   board = [
@@ -31,36 +36,43 @@ function init() {
     "", "", ""
   ];
 
-  turn = whoGoesFirst();
-  win = null;
-  render();   // we'll write this later
-}
-
-function whoGoesFirst() {
   do {
-    var a = prompt("Who goes first?")
-    if (a == null) {
+    var first_Player = prompt("Enter X or O to determine who goes first: ");
+    if (first_Player === null) {
+      turn = "X";
       break;
+    } else if (first_Player === "X" || first_Player === "x") {
+      turn = "X";
+    } else if (first_Player === "O" || first_Player === "o") {
+      turn = "O";
+    } else {
+      determine_first_player = L;
     }
+  } while (first_Player !== "X" && first_Player !== "x" && first_Player !== "O" && first_Player !== "o");
 
-    a = String(a)
+  win = null;
 
-    if (a != "X" && a != "X" && a != "O" && a != "O") {
-      alert("Invalid value. Please type either X or O.")
-    }
-  } while (a != "X" && a != "X" && a != "O" && a != "O" && a != null)
-
-  return a
+  render();
 }
 
 function render() {
   board.forEach(function(mark, index) {
     squares[index].textContent = mark;
   });
-
+  if (win === "X") {
+    x_wins = x_wins + 1
+  }
+  else if (win === "O") {
+    o_wins = o_wins + 1
+  }
+  else if (win === "T") {
+    ties = ties + 1
+  }
+  x_score.innerHTML = x_wins
+  o_score.innerHTML = o_wins
+  tie_score.innerHTML = ties
   message.textContent =
     win === "T" ? "It's a tie!" : win ? `${win} wins!` : `Turn: ${turn}`;
-
 }
 
 function takeTurn(e) {
@@ -86,17 +98,11 @@ function getWinner() {
     if (
       board[condition[0]] &&
       board[condition[0]] === board[condition[1]] &&
-      board[condition[1]] === board[condition[2]]
-    ) {
-      winner = board[condition[0]];
+      board[condition[0]] === board[condition[2]]
+    ){
+        winner = board[condition[0]];
     }
   });
 
   return winner ? winner : board.includes("") ? null : "T";
-}
-
-function scoreKeeper() {
-  if (winner == "X") {
-
-  }
 }
