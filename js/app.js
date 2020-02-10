@@ -45,8 +45,6 @@ function render() {
 
  message.textContent = win ? `${win} wins!` : `Turn: ${turn}`;
 
-}
-
 function takeTurn(e) {
   if (!win) {
     let index = squares.findIndex(function(square) {
@@ -77,7 +75,4 @@ function getWinner() {
   });
 
   return winner ? winner : board.includes("") ? null : "T";
-}
-
-  return winner;
 }
