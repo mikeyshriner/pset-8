@@ -27,6 +27,9 @@ function render() {
     console.log(mark, index);
      squares[index].textContent = mark;    // writes an X or an O on boards
   });
+
+ message.textContent = `Turn: ${turn}`;
+
 }
 
 function takeTurn(e) {
