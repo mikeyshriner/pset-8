@@ -45,10 +45,10 @@ function whoGoesFirst() {
 
     a = String(a)
 
-    if (a != "X" && a != "x" && a != "O" && a != "o") {
+    if (a != "X" && a != "X" && a != "O" && a != "O") {
       alert("Invalid value. Please type either X or O.")
     }
-  } while (a != "X" && a != "x" && a != "O" && a != "o" && a != null)
+  } while (a != "X" && a != "X" && a != "O" && a != "O" && a != null)
 
   return a
 }
