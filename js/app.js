@@ -20,6 +20,7 @@ function init() {
   ];
 
 turn = "X";
+win = null;
 
   render();   // we'll write this later
 }
